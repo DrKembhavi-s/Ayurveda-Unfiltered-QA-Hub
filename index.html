@@ -184,40 +184,26 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
   </div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 <script>
 // ══════════════════════════════════════════════════
 // ★ CONFIGURATION — Replace before deploying ★
 // ══════════════════════════════════════════════════
-const firebaseConfig = {
-  apiKey: "AIzaSyAJtw1wxxkV6MLkZ8VNHoD1NvWFV6uSAKM",
-  authDomain: "ayurveda-unfiltered-qa.firebaseapp.com",
-  projectId: "ayurveda-unfiltered-qa",
-  storageBucket: "ayurveda-unfiltered-qa.firebasestorage.app",
-  messagingSenderId: "500850123802",
-  appId: "1:500850123802:web:d67808da0ddca2dd9cdda3"
+const FB_CFG = {
+  apiKey:            "REPLACE_YOUR_API_KEY",
+  authDomain:        "REPLACE.firebaseapp.com",
+  projectId:         "REPLACE_PROJECT_ID",
+  storageBucket:     "REPLACE.appspot.com",
+  messagingSenderId: "REPLACE_SENDER_ID",
+  appId:             "REPLACE_APP_ID"
 };
-const ADMIN_EMAIL = "drkembhavikpl@gmail.com";
+const ADMIN_EMAIL = "REPLACE_YOUR_EMAIL@gmail.com";
 
 const SUBJECTS = ['Padartha Vigyana & Ayurveda Itihas','Sanskrit','Kriya Sharir','Rachana Sharir','Maulik Siddhanta','Dravyaguna Vigyana','Rasa Shastra & Bhaishajya Kalpana','Charaka Samhita','Swasthavritta & Yoga','Kayachikitsa','Panchakarma','Shalya Tantra','Shalakya Tantra','Prasuti & Stri Roga','Kaumarabhritya','Research Methodology & Biostatistics','Forensic Medicine & Toxicology','Community Medicine','PG / Research — General'];
 const QTYPES  = ['Academic / Conceptual','Clinical / Case-based','Research / Methodology','Exam Preparation','Viva Voce Guidance'];
 const YEARS   = ['1st Year BAMS','2nd Year BAMS','3rd Year BAMS','4th Year BAMS','Intern','PG Scholar','Faculty / Other'];
-
-// ══════════════════════════════════════════════════
-// DYNAMIC FIREBASE LOADER
-// ══════════════════════════════════════════════════
-function loadScript(src){
-  return new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});
-}
-async function boot(){
-  try{
-    await loadScript('https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js');
-    await loadScript('https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js');
-    await loadScript('https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js');
-    initApp();
-  }catch(e){
-    document.getElementById('app').innerHTML=`<div class="loading"><p style="color:#dc2626;font-weight:600">⚠ Failed to load Firebase SDK.<br>Check your internet connection.</p></div>`;
-  }
-}
 
 // ══════════════════════════════════════════════════
 // MAIN APP
@@ -955,7 +941,7 @@ function initApp(){
   };
 }
 
-boot();
+initApp();
 </script>
 </body>
 </html>
