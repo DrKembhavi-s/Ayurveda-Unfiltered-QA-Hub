@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Dr. Kembhavi's Ayurveda Unfiltered Q&A Hub</title>
+<style>
+:root{--g:#1a5c38;--g2:#147a46;--gl:#e8f4ee;--s:#c97d2e;--sl:#fdf3e7;--v:#5b21b6;--vl:#ede9fe;--bg:#f9f5f0;--card:#fff;--txt:#2d2d2d;--mut:#6b7280;--brd:#e5e7eb}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+
+/* NAV */
+.nav{background:var(--g);color:#fff;padding:0 16px;display:flex;align-items:center;justify-content:space-between;min-height:58px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.25);gap:10px;flex-wrap:wrap}
+.nav-brand{font-size:.9rem;font-weight:800;line-height:1.3}
+.nav-brand span{color:#f9c95e}
+.nav-links{display:flex;gap:5px;align-items:center;flex-wrap:wrap;padding:6px 0}
+.nb{background:rgba(255,255,255,.13);border:none;color:#fff;padding:5px 11px;border-radius:6px;cursor:pointer;font-size:.78rem;font-weight:600;transition:background .2s;font-family:inherit;white-space:nowrap}
+.nb:hover{background:rgba(255,255,255,.25)}
+.nb.act{background:var(--s)}.nb.adm{background:#f9c95e;color:#1a1a1a}.nb.gest{background:var(--vl);color:var(--v)}.nb.out{background:rgba(220,38,38,.25)}
+
+/* LAYOUT */
+.main{max-width:960px;margin:0 auto;padding:24px 14px}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:20px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.qcard{background:var(--card);border:1px solid var(--brd);border-radius:10px;padding:15px;margin-bottom:9px;cursor:pointer;transition:box-shadow .2s,border-color .2s}
+.qcard:hover{box-shadow:0 4px 14px rgba(0,0,0,.1);border-color:#9ca3af}
+.scard{background:var(--card);border:1px solid var(--vl);border-radius:12px;padding:18px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.04);border-left:4px solid var(--v);cursor:pointer;transition:box-shadow .2s}
+.scard:hover{box-shadow:0 4px 14px rgba(0,0,0,.1)}
+
+/* ANNOUNCEMENTS */
+.ann{background:linear-gradient(135deg,#fffbeb,#fef3c7);border:1px solid #fcd34d;border-radius:12px;padding:16px;margin-bottom:10px}
+.ann-pin{display:inline-block;background:#dc2626;color:#fff;font-size:.68rem;font-weight:800;padding:2px 8px;border-radius:10px;text-transform:uppercase;margin-bottom:6px}
+.ann-title{font-weight:700;font-size:.95rem;margin-bottom:4px}
+.ann-body{font-size:.85rem;color:#78350f;line-height:1.6}
+.ann-sess{display:inline-flex;align-items:center;gap:5px;margin-top:8px;font-size:.78rem;font-weight:600;color:var(--v);cursor:pointer;background:var(--vl);padding:3px 10px;border-radius:20px}
+
+/* BADGES */
+.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.72rem;font-weight:700}
+.bg{background:var(--gl);color:var(--g)}.bs{background:var(--sl);color:var(--s)}.bgr{background:#f3f4f6;color:#4b5563}.bp{background:#fffbeb;color:#b45309}.br{background:#fef2f2;color:#dc2626}.bv{background:var(--vl);color:var(--v)}
+.su{background:#eff6ff;color:#1d4ed8}.sa{background:#f0fdf4;color:#15803d}.sc{background:#f3f4f6;color:#6b7280}
+
+/* FORMS */
+.fg{margin-bottom:13px}.fl{display:block;font-size:.84rem;font-weight:600;margin-bottom:4px}
+.fi,.fs,.ft{width:100%;padding:9px 12px;border:1px solid var(--brd);border-radius:8px;font-size:.87rem;font-family:inherit;color:var(--txt);background:#fff;outline:none;transition:border-color .2s,box-shadow .2s}
+.fi:focus,.fs:focus,.ft:focus{border-color:var(--g);box-shadow:0 0 0 3px rgba(26,92,56,.1)}
+.ft{resize:vertical;min-height:80px}.fh{font-size:.74rem;color:var(--mut);margin-top:3px}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border-radius:8px;font-size:.86rem;font-weight:600;border:none;cursor:pointer;font-family:inherit;transition:all .2s}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+.bp1{background:var(--g);color:#fff}.bp1:hover{background:var(--g2)}
+.bs1{background:#f3f4f6;color:var(--txt)}.bs1:hover{background:#e5e7eb}
+.bsaf{background:var(--s);color:#fff}.bsaf:hover{background:#a06020}
+.bv1{background:var(--v);color:#fff}.bv1:hover{background:#4c1d95}
+.bsm{padding:5px 12px;font-size:.76rem}.bfull{width:100%;justify-content:center}
+
+/* AUTH */
+.auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f3d25,#1a5c38 55%,#2a7050);padding:20px}
+.auth-card{background:#fff;border-radius:16px;padding:30px;width:100%;max-width:430px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.auth-logo{text-align:center;margin-bottom:20px}
+.auth-logo h1{font-size:1.2rem;color:var(--g);font-weight:800;line-height:1.4}
+.auth-logo p{color:var(--mut);font-size:.8rem;margin-top:4px}
+.atabs{display:flex;background:#f3f4f6;border-radius:8px;padding:3px;margin-bottom:18px}
+.atab{flex:1;text-align:center;padding:7px;border-radius:6px;cursor:pointer;font-size:.83rem;font-weight:600;color:var(--mut);border:none;background:none;font-family:inherit;transition:all .2s}
+.atab.act{background:#fff;color:var(--g);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+
+/* ADMIN TABS */
+.adm-tabs{display:flex;gap:0;margin-bottom:22px;border-bottom:2px solid var(--brd)}
+.adm-tab{padding:9px 18px;font-size:.85rem;font-weight:600;color:var(--mut);cursor:pointer;border:none;background:none;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.adm-tab.act{color:var(--g);border-bottom-color:var(--g)}
+
+/* MISC */
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.chip{padding:5px 12px;border-radius:20px;border:1px solid var(--brd);background:#fff;font-size:.77rem;cursor:pointer;color:var(--mut);transition:all .2s;font-family:inherit}
+.chip.act{background:var(--g);color:#fff;border-color:var(--g)}
+.qmeta{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px}
+.qtitle{font-size:.97rem;font-weight:700;color:var(--txt);margin-bottom:5px;line-height:1.4}
+.qprev{font-size:.82rem;color:var(--mut);line-height:1.5}
+.qfooter{display:flex;justify-content:space-between;align-items:center;margin-top:9px;padding-top:8px;border-top:1px solid var(--brd)}
+.qby{font-size:.74rem;color:var(--mut)}
+.abody{font-size:.92rem;line-height:1.75;white-space:pre-wrap}
+.abox{background:var(--gl);border-left:4px solid var(--g);border-radius:0 8px 8px 0;padding:16px;margin-top:8px}
+.enote{background:var(--sl);border-left:4px solid var(--s);border-radius:0 8px 8px 0;padding:13px;margin-top:12px}
+.enote-lbl{font-size:.7rem;font-weight:800;color:var(--s);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:18px}
+.scard-s{background:var(--card);border:1px solid var(--brd);border-radius:10px;padding:13px;text-align:center}
+.snum{font-size:1.6rem;font-weight:800;color:var(--g)}.slbl{font-size:.72rem;color:var(--mut);margin-top:1px}
+.alert{padding:10px 14px;border-radius:8px;font-size:.84rem;margin-bottom:12px}
+.aerr{background:#fef2f2;color:#dc2626;border:1px solid #fecaca}
+.aok{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
+.ph{margin-bottom:20px}.ph h2{font-size:1.3rem;font-weight:800;color:var(--g)}.ph p{color:var(--mut);font-size:.83rem;margin-top:3px}
+.sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px}.st{font-size:.92rem;font-weight:700}
+.empty{text-align:center;padding:36px 20px;color:var(--mut)}.empty-ico{font-size:2.2rem;margin-bottom:8px}
+.loading{text-align:center;padding:36px;color:var(--mut)}
+.spin{width:26px;height:26px;border:3px solid var(--brd);border-top-color:var(--g);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.divider{display:flex;align-items:center;gap:9px;margin:12px 0;color:var(--mut);font-size:.76rem}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--brd)}
+.cb-lbl{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:.84rem}
+.cb-lbl input{width:15px;height:15px;accent-color:var(--g)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ava{width:38px;height:38px;border-radius:50%;background:var(--g);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;flex-shrink:0}
+.fade{animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:300;align-items:center;justify-content:center;padding:14px}
+.modal-bg.open{display:flex}
+.modal-inner{background:#fff;border-radius:16px;padding:24px;max-width:700px;width:100%;max-height:90vh;overflow-y:auto}
+.sess-hero{background:linear-gradient(135deg,var(--v),#7c3aed);color:#fff;border-radius:12px;padding:22px;margin-bottom:16px}
+.sess-hero h2{font-size:1.2rem;font-weight:800;margin-bottom:6px}
+.sess-hero p{font-size:.85rem;opacity:.85;line-height:1.5}
+.guest-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.2);padding:5px 12px;border-radius:20px;font-size:.8rem;font-weight:600;margin-top:10px}
+@media(max-width:580px){.grid2{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div id="app"><div class="loading"><div class="spin"></div>Loading…</div></div>
+
+<!-- MODAL: Answer -->
+<div class="modal-bg" id="modal-ans">
+  <div class="modal-inner">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+      <h3 style="font-size:.97rem;font-weight:700;flex:1;padding-right:12px" id="ma-title"></h3>
+      <button class="btn bs1 bsm" onclick="APP.closeAnsModal()">✕</button>
+    </div>
+    <div id="ma-q" style="font-size:.83rem;color:var(--mut);background:#f9f5f0;border-radius:8px;padding:11px;margin-bottom:16px;white-space:pre-wrap;max-height:140px;overflow-y:auto"></div>
+    <div class="fg"><label class="fl">Answer <span style="color:#dc2626">*</span></label><textarea class="ft" id="ma-ans" rows="8" placeholder="Write your answer here…"></textarea></div>
+    <div class="fg"><label class="fl">📝 Examiner's Lens <span style="font-weight:400;color:var(--mut)">(Optional)</span></label><textarea class="ft" id="ma-exam" rows="3" placeholder="How would an examiner evaluate this in a written paper or viva?"></textarea></div>
+    <div style="display:flex;gap:9px;justify-content:flex-end">
+      <button class="btn bs1" onclick="APP.closeAnsModal()">Cancel</button>
+      <button class="btn bp1" id="btn-post-ans">Post Answer</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Create/Edit Session -->
+<div class="modal-bg" id="modal-sess">
+  <div class="modal-inner">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <h3 style="font-size:1rem;font-weight:700" id="ms-heading">Create Guest Session</h3>
+      <button class="btn bs1 bsm" onclick="APP.closeSessModal()">✕</button>
+    </div>
+    <div id="ms-err"></div>
+    <div class="fg"><label class="fl">Session Title <span style="color:#dc2626">*</span></label><input class="fi" id="ms-title" placeholder="E.g., Dravyaguna Deep Dive: Classical Drug Review"/></div>
+    <div class="fg"><label class="fl">Session Description / Announcement Text <span style="color:#dc2626">*</span></label><textarea class="ft" id="ms-desc" rows="3" placeholder="What this session will cover, and what students should come prepared with…"></textarea></div>
+    <div class="grid2">
+      <div class="fg"><label class="fl">Subject / Topic <span style="color:#dc2626">*</span></label><select class="fs" id="ms-subj"><option value="">Select…</option>${['Padartha Vigyana & Ayurveda Itihas','Sanskrit','Kriya Sharir','Rachana Sharir','Maulik Siddhanta','Dravyaguna Vigyana','Rasa Shastra & Bhaishajya Kalpana','Charaka Samhita','Swasthavritta & Yoga','Kayachikitsa','Panchakarma','Shalya Tantra','Shalakya Tantra','Prasuti & Stri Roga','Kaumarabhritya','Research Methodology & Biostatistics','Forensic Medicine & Toxicology','Community Medicine','PG / Research — General'].map(s=>`<option>${s}</option>`).join('')}</select></div>
+      <div class="fg"><label class="fl">Scheduled Date & Time <span style="color:#dc2626">*</span></label><input class="fi" id="ms-dt" type="datetime-local"/></div>
+    </div>
+    <div style="background:var(--vl);border-radius:10px;padding:14px;margin-bottom:14px">
+      <div style="font-size:.82rem;font-weight:700;color:var(--v);margin-bottom:10px">👤 Guest Teacher Details</div>
+      <div class="grid2">
+        <div class="fg" style="margin-bottom:0"><label class="fl">Guest Name <span style="color:#dc2626">*</span></label><input class="fi" id="ms-gname" placeholder="Dr. Anita Kadagad Kembhavi"/></div>
+        <div class="fg" style="margin-bottom:0"><label class="fl">Credentials / Title</label><input class="fi" id="ms-gtitle" placeholder="MD Kayachikitsa, MSc Yoga"/></div>
+      </div>
+      <div class="fg" style="margin-top:10px;margin-bottom:0"><label class="fl">Guest Email (for login access) <span style="color:#dc2626">*</span></label><input class="fi" id="ms-gemail" type="email" placeholder="guest@example.com"/>
+        <div class="fh">The guest teacher must register/login with this exact email to answer questions in this session.</div>
+      </div>
+    </div>
+    <div class="fg"><label class="fl">Status</label><select class="fs" id="ms-status"><option value="upcoming">Upcoming</option><option value="active">Active (Live Now)</option><option value="completed">Completed</option></select></div>
+    <div style="display:flex;gap:9px;justify-content:flex-end">
+      <button class="btn bs1" onclick="APP.closeSessModal()">Cancel</button>
+      <button class="btn bv1" id="btn-save-sess">Save Session</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Create Announcement -->
+<div class="modal-bg" id="modal-ann">
+  <div class="modal-inner">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <h3 style="font-size:1rem;font-weight:700">Post Announcement</h3>
+      <button class="btn bs1 bsm" onclick="APP.closeAnnModal()">✕</button>
+    </div>
+    <div id="mann-err"></div>
+    <div class="fg"><label class="fl">Title <span style="color:#dc2626">*</span></label><input class="fi" id="mann-title" placeholder="E.g., Guest Session this Saturday — Submit Questions Now!"/></div>
+    <div class="fg"><label class="fl">Message <span style="color:#dc2626">*</span></label><textarea class="ft" id="mann-body" rows="5" placeholder="Write the announcement for all students…"></textarea></div>
+    <div class="fg"><label class="fl">Link to a Session (Optional)</label><select class="fs" id="mann-sess"><option value="">No session link</option></select></div>
+    <div class="fg"><label class="cb-lbl"><input type="checkbox" id="mann-pin"/> 📌 Pin this announcement (shows prominently at top)</label></div>
+    <div style="display:flex;gap:9px;justify-content:flex-end">
+      <button class="btn bs1" onclick="APP.closeAnnModal()">Cancel</button>
+      <button class="btn bp1" id="btn-save-ann">Post Announcement</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════
+// ★ CONFIGURATION — Replace before deploying ★
+// ══════════════════════════════════════════════════
+const FB_CFG = {
+  apiKey:            "REPLACE_YOUR_API_KEY",
+  authDomain:        "REPLACE.firebaseapp.com",
+  projectId:         "REPLACE_PROJECT_ID",
+  storageBucket:     "REPLACE.appspot.com",
+  messagingSenderId: "REPLACE_SENDER_ID",
+  appId:             "REPLACE_APP_ID"
+};
+const ADMIN_EMAIL = "REPLACE_YOUR_EMAIL@gmail.com";
+
+const SUBJECTS = ['Padartha Vigyana & Ayurveda Itihas','Sanskrit','Kriya Sharir','Rachana Sharir','Maulik Siddhanta','Dravyaguna Vigyana','Rasa Shastra & Bhaishajya Kalpana','Charaka Samhita','Swasthavritta & Yoga','Kayachikitsa','Panchakarma','Shalya Tantra','Shalakya Tantra','Prasuti & Stri Roga','Kaumarabhritya','Research Methodology & Biostatistics','Forensic Medicine & Toxicology','Community Medicine','PG / Research — General'];
+const QTYPES  = ['Academic / Conceptual','Clinical / Case-based','Research / Methodology','Exam Preparation','Viva Voce Guidance'];
+const YEARS   = ['1st Year BAMS','2nd Year BAMS','3rd Year BAMS','4th Year BAMS','Intern','PG Scholar','Faculty / Other'];
+
+// ══════════════════════════════════════════════════
+// DYNAMIC FIREBASE LOADER
+// ══════════════════════════════════════════════════
+function loadScript(src){
+  return new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});
+}
+async function boot(){
+  try{
+    await loadScript('https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js');
+    await loadScript('https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js');
+    await loadScript('https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js');
+    initApp();
+  }catch(e){
+    document.getElementById('app').innerHTML=`<div class="loading"><p style="color:#dc2626;font-weight:600">⚠ Failed to load Firebase SDK.<br>Check your internet connection.</p></div>`;
+  }
+}
+
+// ══════════════════════════════════════════════════
+// MAIN APP
+// ══════════════════════════════════════════════════
+function initApp(){
+  firebase.initializeApp(FB_CFG);
+  const auth=firebase.auth(), db=firebase.firestore(), FS=firebase.firestore.FieldValue;
+
+  // ── STATE ─────────────────────────────────────
+  let user=null,profile=null,admin=false,isGuest=false,guestSessions=[];
+  let view='loading',vp={},filter='all',search='';
+  let pendingMap={},answeringId=null,authTab='login',adminTab='questions';
+  let editingSessionId=null;
+
+  // ── HELPERS ───────────────────────────────────
+  const $=id=>document.getElementById(id);
+  const esc=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  const trunc=(s,n)=>s&&s.length>n?s.slice(0,n)+'…':(s||'');
+  const fmt=ts=>{if(!ts)return'';const d=ts.toDate?ts.toDate():new Date(ts);return d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});};
+  const fmtDT=ts=>{if(!ts)return'';const d=ts.toDate?ts.toDate():new Date(ts);return d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});};
+  const typeClass=t=>({'Academic / Conceptual':'bg','Clinical / Case-based':'bs','Research / Methodology':'bgr','Exam Preparation':'br','Viva Voce Guidance':'bgr'}[t]||'bgr');
+  const statusClass=s=>({'upcoming':'su','active':'sa','completed':'sc'}[s]||'sc');
+  const statusLabel=s=>({'upcoming':'🔔 Upcoming','active':'🟢 Live Now','completed':'✓ Completed'}[s]||s);
+  const canAnswer=q=>admin||(isGuest&&guestSessions.some(gs=>gs.id===q.sessionId));
+
+  // ── AUTH OBSERVER ─────────────────────────────
+  auth.onAuthStateChanged(async u=>{
+    if(u){
+      user=u; admin=(u.email===ADMIN_EMAIL);
+      try{const s=await db.collection('users').doc(u.uid).get();profile=s.exists?s.data():null;}catch(e){profile=null;}
+      if(!admin){
+        try{
+          const gs=await db.collection('sessions').where('guestEmail','==',u.email).get();
+          guestSessions=gs.docs.map(d=>({id:d.id,...d.data()})).filter(s=>s.status==='upcoming'||s.status==='active');
+          isGuest=guestSessions.length>0;
+        }catch(e){guestSessions=[];isGuest=false;}
+      }
+      nav('dashboard');
+    }else{user=null;profile=null;admin=false;isGuest=false;guestSessions=[];nav('auth');}
+  });
+
+  // ── ROUTER ────────────────────────────────────
+  function nav(v,p={}){view=v;vp=p;render();}
+
+  function render(){
+    const app=$('app');
+    if(view==='loading'){app.innerHTML=`<div class="loading"><div class="spin"></div>Loading…</div>`;return;}
+    if(!user||view==='auth'){app.innerHTML=renderAuth();bindAuth();return;}
+    app.innerHTML=renderNav()+`<div class="main fade">${
+      view==='dashboard' ?renderDashboard():
+      view==='sessions'  ?renderSessions() :
+      view==='session'   ?renderSession()  :
+      view==='ask'       ?renderAsk()      :
+      view==='question'  ?renderQuestion() :
+      view==='guest'     ?renderGuest()    :
+      view==='admin'     ?renderAdmin()    :
+      view==='profile'   ?renderProfile()  :'<p>404</p>'
+    }</div>`;
+    bindMain();
+  }
+
+  // ── NAV ───────────────────────────────────────
+  function renderNav(){
+    return`<nav class="nav">
+      <div class="nav-brand">🌿 Dr. Kembhavi's Ayurveda Unfiltered <span>Q&A Hub</span></div>
+      <div class="nav-links">
+        <button class="nb ${view==='dashboard'?'act':''}" onclick="APP.nav('dashboard')">Home</button>
+        <button class="nb ${view==='sessions'?'act':''}" onclick="APP.nav('sessions')">Sessions</button>
+        <button class="nb ${view==='ask'?'act':''}" onclick="APP.nav('ask')">Ask</button>
+        ${isGuest&&!admin?`<button class="nb gest ${view==='guest'?'act':''}" onclick="APP.nav('guest')">My Session</button>`:''}
+        ${admin?`<button class="nb adm ${view==='admin'?'act':''}" onclick="APP.nav('admin')">⚙ Admin</button>`:''}
+        <button class="nb ${view==='profile'?'act':''}" onclick="APP.nav('profile')">Profile</button>
+        <button class="nb out" onclick="auth.signOut()">Sign Out</button>
+      </div>
+    </nav>`;
+  }
+
+  // ── AUTH ──────────────────────────────────────
+  function gIcon(){return`<svg width="15" height="15" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>`}
+
+  function renderAuth(){
+    return`<div class="auth-wrap"><div class="auth-card">
+      <div class="auth-logo"><div style="font-size:2rem;margin-bottom:6px">🌿</div>
+        <h1>Dr. Kembhavi's Ayurveda Unfiltered Q&amp;A Hub</h1>
+        <p>Academic · Clinical · Research · Exam Guidance</p></div>
+      <div class="atabs">
+        <button class="atab ${authTab==='login'?'act':''}" onclick="APP.switchTab('login')">Sign In</button>
+        <button class="atab ${authTab==='register'?'act':''}" onclick="APP.switchTab('register')">Register</button>
+      </div>
+      <div id="auth-err"></div>
+      <div id="login-f" style="display:${authTab==='login'?'block':'none'}">
+        <div class="fg"><label class="fl">Email</label><input class="fi" id="l-email" type="email" placeholder="your@email.com"/></div>
+        <div class="fg"><label class="fl">Password</label><input class="fi" id="l-pass" type="password" placeholder="••••••••"/></div>
+        <button class="btn bp1 bfull" id="btn-login">Sign In</button>
+        <div class="divider">or</div>
+        <button class="btn bs1 bfull" id="btn-g1">${gIcon()} Continue with Google</button>
+      </div>
+      <div id="reg-f" style="display:${authTab==='register'?'block':'none'}">
+        <div class="fg"><label class="fl">Full Name</label><input class="fi" id="r-name" placeholder="Vd. / Dr. Your Name"/></div>
+        <div class="fg"><label class="fl">Email</label><input class="fi" id="r-email" type="email" placeholder="your@email.com"/></div>
+        <div class="fg"><label class="fl">Password</label><input class="fi" id="r-pass" type="password" placeholder="Min. 6 characters"/></div>
+        <div class="grid2">
+          <div class="fg"><label class="fl">BAMS Year</label><select class="fs" id="r-year"><option value="">Select…</option>${YEARS.map(y=>`<option>${esc(y)}</option>`).join('')}</select></div>
+          <div class="fg"><label class="fl">College</label><input class="fi" id="r-col" placeholder="Your college"/></div>
+        </div>
+        <button class="btn bp1 bfull" id="btn-reg">Create Account</button>
+        <div class="divider">or</div>
+        <button class="btn bs1 bfull" id="btn-g2">${gIcon()} Continue with Google</button>
+        <p class="fh" style="text-align:center;margin-top:10px">By registering you agree to respectful academic use of this platform.</p>
+      </div>
+    </div></div>`;
+  }
+
+  function authErr(m){const el=$('auth-err');if(el)el.innerHTML=`<div class="alert aerr">${esc(m)}</div>`;}
+  function fae(c){return({'auth/user-not-found':'No account found.','auth/wrong-password':'Incorrect password.','auth/email-already-in-use':'Email already registered.','auth/invalid-email':'Invalid email.','auth/weak-password':'Password too weak.','auth/too-many-requests':'Too many attempts.','auth/popup-closed-by-user':'Popup closed.'}[c]||'Something went wrong.');}
+
+  function bindAuth(){
+    $('btn-login').onclick=async()=>{
+      const e=$('l-email').value.trim(),p=$('l-pass').value;
+      if(!e||!p){authErr('Please fill all fields.');return;}
+      $('btn-login').disabled=true;$('btn-login').textContent='Signing in…';
+      try{await auth.signInWithEmailAndPassword(e,p);}
+      catch(err){authErr(fae(err.code));$('btn-login').disabled=false;$('btn-login').textContent='Sign In';}
+    };
+    $('btn-reg').onclick=async()=>{
+      const name=$('r-name').value.trim(),email=$('r-email').value.trim(),pass=$('r-pass').value,yr=$('r-year').value,col=$('r-col').value.trim();
+      if(!name||!email||!pass||!yr||!col){authErr('Please fill all fields.');return;}
+      if(pass.length<6){authErr('Password needs 6+ characters.');return;}
+      $('btn-reg').disabled=true;$('btn-reg').textContent='Creating…';
+      try{
+        const c=await auth.createUserWithEmailAndPassword(email,pass);
+        await c.user.updateProfile({displayName:name});
+        await db.collection('users').doc(c.user.uid).set({name,email,year:yr,college:col,joinedAt:FS.serverTimestamp()});
+      }catch(err){authErr(fae(err.code));$('btn-reg').disabled=false;$('btn-reg').textContent='Create Account';}
+    };
+    const gIn=async()=>{
+      try{
+        const prov=new firebase.auth.GoogleAuthProvider();
+        const c=await auth.signInWithPopup(prov);
+        const s=await db.collection('users').doc(c.user.uid).get();
+        if(!s.exists)await db.collection('users').doc(c.user.uid).set({name:c.user.displayName||'',email:c.user.email||'',year:'',college:'',needsProfile:true,joinedAt:FS.serverTimestamp()});
+      }catch(err){authErr(fae(err.code));}
+    };
+    $('btn-g1').onclick=gIn;$('btn-g2').onclick=gIn;
+    [$('l-email'),$('l-pass')].forEach(el=>el&&(el.onkeydown=e=>e.key==='Enter'&&$('btn-login').click()));
+  }
+
+  // ── DASHBOARD ─────────────────────────────────
+  function renderDashboard(){
+    return`<div class="ph"><h2>Welcome to the Q&amp;A Hub</h2>
+      <p>Announcements, upcoming sessions, and all answered questions — in one place.</p></div>
+      <div id="dash-ann"></div>
+      <div id="dash-sess" style="margin-bottom:16px"></div>
+      <div class="card" style="padding:13px 15px">
+        <input class="fi" id="srch" placeholder="🔍  Search questions…" style="margin-bottom:10px" value="${esc(search)}"/>
+        <div class="filters">
+          <button class="chip ${filter==='all'?'act':''}" onclick="APP.setFilter('all')">All</button>
+          ${QTYPES.map(t=>`<button class="chip ${filter===t?'act':''}" onclick="APP.setFilter('${esc(t)}')">${esc(t)}</button>`).join('')}
+        </div>
+      </div>
+      <div id="qlist"><div class="loading"><div class="spin"></div></div></div>
+      <div style="text-align:center;margin-top:16px"><button class="btn bsaf" onclick="APP.nav('ask')">+ Ask a Question</button></div>`;
+  }
+
+  async function loadDashboard(){
+    // Announcements
+    const annEl=$('dash-ann');
+    if(annEl){
+      try{
+        const asnap=await db.collection('announcements').orderBy('createdAt','desc').limit(5).get();
+        const anns=asnap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.pinned?1:0)-(a.pinned?1:0));
+        annEl.innerHTML=anns.length?anns.map(a=>`<div class="ann">
+          ${a.pinned?'<span class="ann-pin">📌 Pinned</span>':''}
+          <div class="ann-title">${esc(a.title)}</div>
+          <div class="ann-body">${esc(a.body)}</div>
+          ${a.sessionId?`<span class="ann-sess" onclick="APP.nav('session',{id:'${a.sessionId}'})">🎓 View Session →</span>`:''}
+        </div>`).join(''):'';
+      }catch(e){annEl.innerHTML='';}
+    }
+    // Upcoming Sessions preview
+    const sessEl=$('dash-sess');
+    if(sessEl){
+      try{
+        const ssnap=await db.collection('sessions').get();
+        const upcoming=ssnap.docs.map(d=>({id:d.id,...d.data()})).filter(s=>s.status==='upcoming'||s.status==='active').slice(0,2);
+        if(upcoming.length){
+          sessEl.innerHTML=`<div class="sh"><span class="st">🎓 Upcoming Sessions</span><button class="btn bs1 bsm" onclick="APP.nav('sessions')">View All →</button></div>`+
+          upcoming.map(s=>`<div class="scard" onclick="APP.nav('session',{id:'${s.id}'})">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px">
+              <div><div style="font-weight:700;font-size:.95rem;color:var(--v)">${esc(s.title)}</div>
+                <div style="font-size:.8rem;color:var(--mut);margin-top:3px">🕐 ${fmtDT(s.scheduledAt)} · ${esc(s.subject)}</div>
+                <div style="font-size:.8rem;margin-top:4px">👤 Guest: <strong>${esc(s.guestName)}</strong>${s.guestTitle?' · '+esc(s.guestTitle):''}</div>
+              </div>
+              <span class="badge ${statusClass(s.status)}">${statusLabel(s.status)}</span>
+            </div>
+            <div style="margin-top:8px"><button class="btn bv1 bsm">Submit Questions →</button></div>
+          </div>`).join('');
+        }else{sessEl.innerHTML='';}
+      }catch(e){sessEl.innerHTML='';}
+    }
+    // Questions
+    const qEl=$('qlist');if(!qEl)return;
+    try{
+      const snap=await db.collection('questions').where('status','==','answered').get();
+      let docs=snap.docs.map(d=>({id:d.id,...d.data()}));
+      docs.sort((a,b)=>(b.answeredAt?.toDate?.()??new Date(0))-(a.answeredAt?.toDate?.()??new Date(0)));
+      if(filter!=='all')docs=docs.filter(d=>d.qtype===filter);
+      if(search){const q=search.toLowerCase();docs=docs.filter(d=>(d.title||'').toLowerCase().includes(q)||(d.detail||'').toLowerCase().includes(q)||(d.subject||'').toLowerCase().includes(q));}
+      if(!docs.length){qEl.innerHTML=`<div class="empty"><div class="empty-ico">📚</div><h3>No answered questions yet</h3></div>`;return;}
+      qEl.innerHTML=docs.map(d=>`<div class="qcard" onclick="APP.nav('question',{id:'${d.id}'})">
+        <div class="qmeta"><span class="badge bg">${esc(d.subject)}</span><span class="badge ${typeClass(d.qtype)}">${esc(d.qtype)}</span>
+          ${d.sessionId?`<span class="badge bv">🎓 ${esc(d.sessionTitle||'Session')}</span>`:''}
+          ${d.year?`<span class="badge bgr">${esc(d.year)}</span>`:''}</div>
+        <div class="qtitle">${esc(d.title)}</div>
+        <div class="qprev">${esc(trunc(d.detail,160))}</div>
+        <div class="qfooter"><span class="qby">By ${d.anonymous?'Anonymous':esc(d.askerName||'Student')} · ${fmt(d.createdAt)}</span><span class="badge bg">✓ Answered</span></div>
+      </div>`).join('');
+    }catch(e){qEl.innerHTML=`<div class="alert aerr">Error: ${esc(e.message)}</div>`;}
+  }
+
+  // ── SESSIONS LIST ─────────────────────────────
+  function renderSessions(){
+    return`<div class="ph"><h2>🎓 Guest Sessions</h2>
+      <p>Scheduled guest teacher sessions. Click any session to view details and submit questions.</p></div>
+      <div id="slist"><div class="loading"><div class="spin"></div></div></div>`;
+  }
+
+  async function loadSessions(){
+    const el=$('slist');if(!el)return;
+    try{
+      const snap=await db.collection('sessions').orderBy('scheduledAt','desc').get();
+      const docs=snap.docs.map(d=>({id:d.id,...d.data()}));
+      if(!docs.length){el.innerHTML=`<div class="empty"><div class="empty-ico">📅</div><h3>No sessions announced yet</h3><p>Check back soon.</p></div>`;return;}
+      const order={active:0,upcoming:1,completed:2};
+      docs.sort((a,b)=>(order[a.status]??3)-(order[b.status]??3));
+      el.innerHTML=docs.map(s=>`<div class="scard" onclick="APP.nav('session',{id:'${s.id}'})">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div style="flex:1">
+            <div style="font-weight:800;font-size:1rem;color:var(--v);margin-bottom:4px">${esc(s.title)}</div>
+            <div style="font-size:.82rem;color:var(--mut);margin-bottom:6px">📅 ${fmtDT(s.scheduledAt)} &nbsp;|&nbsp; ${esc(s.subject)}</div>
+            <div style="font-size:.84rem">👤 <strong>${esc(s.guestName)}</strong>${s.guestTitle?' &nbsp;·&nbsp; <em>'+esc(s.guestTitle)+'</em>':''}</div>
+            <div style="font-size:.82rem;color:var(--mut);margin-top:6px;line-height:1.5">${esc(trunc(s.description,120))}</div>
+          </div>
+          <span class="badge ${statusClass(s.status)}" style="font-size:.78rem">${statusLabel(s.status)}</span>
+        </div>
+        <div style="margin-top:10px"><button class="btn bv1 bsm">View &amp; Submit Questions →</button></div>
+      </div>`).join('');
+    }catch(e){el.innerHTML=`<div class="alert aerr">Error: ${esc(e.message)}</div>`;}
+  }
+
+  // ── SESSION DETAIL ────────────────────────────
+  function renderSession(){return`<div id="sdw"><div class="loading"><div class="spin"></div></div></div>`;}
+
+  async function loadSession(id){
+    const el=$('sdw');if(!el)return;
+    try{
+      const ssnap=await db.collection('sessions').doc(id).get();
+      if(!ssnap.exists){el.innerHTML=`<div class="alert aerr">Session not found.</div>`;return;}
+      const s={id:ssnap.id,...ssnap.data()};
+      const qsnap=await db.collection('questions').where('sessionId','==',id).get();
+      const allQ=qsnap.docs.map(d=>({id:d.id,...d.data()}));
+      const answered=allQ.filter(q=>q.status==='answered').sort((a,b)=>(b.answeredAt?.toDate?.()??0)-(a.answeredAt?.toDate?.()??0));
+      const pending=allQ.filter(q=>q.status==='pending');
+
+      el.innerHTML=`
+        <button class="btn bs1 bsm" onclick="APP.nav('sessions')" style="margin-bottom:14px">← All Sessions</button>
+        <div class="sess-hero">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+            <div>
+              <span class="badge ${statusClass(s.status)}" style="margin-bottom:8px;display:inline-block">${statusLabel(s.status)}</span>
+              <h2>${esc(s.title)}</h2>
+              <p>${esc(s.description)}</p>
+              <div class="guest-chip">👤 ${esc(s.guestName)}${s.guestTitle?' · '+esc(s.guestTitle):''}</div>
+            </div>
+            <div style="text-align:right;font-size:.82rem;opacity:.85">📅 ${fmtDT(s.scheduledAt)}<br><small>${esc(s.subject)}</small></div>
+          </div>
+        </div>
+
+        ${(admin||(isGuest&&guestSessions.some(gs=>gs.id===id)))&&pending.length?`
+          <div class="card" style="background:var(--sl);border-color:var(--s)">
+            <div style="font-weight:700;color:var(--s);margin-bottom:10px">⏳ ${pending.length} Pending Question${pending.length>1?'s':''} — ready for your answers</div>
+            ${pending.map(q=>`<div class="qcard" style="cursor:default">
+              <div class="qmeta"><span class="badge bg">${esc(q.subject)}</span><span class="badge ${typeClass(q.qtype)}">${esc(q.qtype)}</span></div>
+              <div class="qtitle">${esc(q.title)}</div>
+              <div class="qprev">${esc(trunc(q.detail,100))}</div>
+              <div class="qfooter"><span class="qby">By ${q.anonymous?'Anonymous':esc(q.askerName)}</span>
+                <button class="btn bp1 bsm" onclick="APP.openAnsModal('${q.id}')">Answer</button></div>
+            </div>`).join('')}
+          </div>`:''
+        }
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+          <div style="font-weight:700;font-size:.92rem">${answered.length} Answered Question${answered.length!==1?'s':''}</div>
+          ${s.status!=='completed'?`<button class="btn bv1 bsm" onclick="APP.nav('ask',{sessionId:'${s.id}',sessionTitle:'${esc(s.title)}'})">+ Submit a Question for This Session</button>`:''}
+        </div>
+
+        ${answered.length?answered.map(q=>`<div class="qcard" onclick="APP.nav('question',{id:'${q.id}'})">
+          <div class="qmeta"><span class="badge bg">${esc(q.subject)}</span><span class="badge ${typeClass(q.qtype)}">${esc(q.qtype)}</span></div>
+          <div class="qtitle">${esc(q.title)}</div>
+          <div class="qprev">${esc(trunc(q.detail,120))}</div>
+          <div class="qfooter"><span class="qby">By ${q.anonymous?'Anonymous':esc(q.askerName)} · ${fmt(q.createdAt)}</span><span class="badge bg">✓</span></div>
+        </div>`).join(''):`<div class="empty"><div class="empty-ico">💬</div><h3>No answered questions yet</h3><p>Be the first to submit one!</p></div>`}`;
+
+    }catch(e){el.innerHTML=`<div class="alert aerr">Error: ${esc(e.message)}</div>`;}
+  }
+
+  // ── ASK ───────────────────────────────────────
+  function renderAsk(){
+    const sessId=vp.sessionId||'',sessTitle=vp.sessionTitle||'';
+    return`<div class="ph"><h2>Ask a Question</h2>
+      <p>${sessId?`Submitting for session: <strong>${esc(sessTitle)}</strong>`:'Specific, well-framed questions receive the most useful answers.'}</p></div>
+      <div class="card">
+        <div id="ask-msg"></div>
+        ${sessId?`<div class="alert" style="background:var(--vl);border-color:var(--v);color:var(--v);margin-bottom:14px">🎓 This question will be sent to the session: <strong>${esc(sessTitle)}</strong></div>`:''}
+        <div class="fg"><label class="fl">Question Title <span style="color:#dc2626">*</span></label>
+          <input class="fi" id="q-title" maxlength="200" placeholder="E.g., What is the role of Agni in the pathogenesis of Ama?"/>
+          <div class="fh">Concise and specific — not just a topic name.</div></div>
+        <div class="grid2">
+          <div class="fg"><label class="fl">Subject <span style="color:#dc2626">*</span></label>
+            <select class="fs" id="q-sub"><option value="">Select…</option>${SUBJECTS.map(s=>`<option>${esc(s)}</option>`).join('')}</select></div>
+          <div class="fg"><label class="fl">Question Type <span style="color:#dc2626">*</span></label>
+            <select class="fs" id="q-type"><option value="">Select…</option>${QTYPES.map(t=>`<option>${esc(t)}</option>`).join('')}</select></div>
+        </div>
+        <div class="fg"><label class="fl">Your BAMS Year</label>
+          <select class="fs" id="q-yr"><option value="">Select…</option>${YEARS.map(y=>`<option ${profile?.year===y?'selected':''}>${esc(y)}</option>`).join('')}</select></div>
+        <div class="fg"><label class="fl">Detailed Question <span style="color:#dc2626">*</span></label>
+          <textarea class="ft" id="q-det" rows="7" placeholder="Describe your doubt fully. State what you already understand and where the confusion is. For clinical questions, include relevant case context."></textarea>
+          <div class="fh">Minimum 60 characters. More context = better answer.</div></div>
+        <div class="fg"><label class="cb-lbl"><input type="checkbox" id="q-anon"/> Post anonymously</label></div>
+        <div style="display:flex;gap:9px;justify-content:flex-end">
+          <button class="btn bs1" onclick="APP.nav(${sessId?`'session',{id:'${sessId}'}`:"'dashboard'"})">Cancel</button>
+          <button class="btn bp1" id="btn-sq">Submit Question</button>
+        </div>
+      </div>`;
+  }
+
+  async function submitQ(){
+    const title=$('q-title').value.trim(),sub=$('q-sub').value,qtype=$('q-type').value,
+          yr=$('q-yr').value,det=$('q-det').value.trim(),anon=$('q-anon').checked;
+    const msg=$('ask-msg');
+    if(!title||!sub||!qtype||!det){msg.innerHTML=`<div class="alert aerr">Please fill all required fields.</div>`;return;}
+    if(det.length<60){msg.innerHTML=`<div class="alert aerr">Please elaborate further (min 60 characters).</div>`;return;}
+    const btn=$('btn-sq');btn.disabled=true;btn.textContent='Submitting…';
+    try{
+      await db.collection('questions').add({
+        title,subject:sub,qtype,year:yr,detail:det,anonymous:anon,
+        askedBy:user.uid,askerName:profile?.name||user.displayName||'Student',askerCollege:profile?.college||'',
+        status:'pending',createdAt:FS.serverTimestamp(),answeredAt:null,answer:null,examinerNote:null,
+        sessionId:vp.sessionId||null,sessionTitle:vp.sessionTitle||null
+      });
+      msg.innerHTML=`<div class="alert aok">✓ Question submitted! ${vp.sessionId?'It will appear in the session once answered.':'Dr. Kembhavi will respond within a few working days.'} Track it under My Profile.</div>`;
+      ['q-title','q-det'].forEach(id=>$(id)&&($(id).value=''));
+    }catch(e){msg.innerHTML=`<div class="alert aerr">Error: ${esc(e.message)}</div>`;}
+    btn.disabled=false;btn.textContent='Submit Question';
+  }
+
+  // ── QUESTION DETAIL ───────────────────────────
+  function renderQuestion(){return`<div id="qdw"><div class="loading"><div class="spin"></div></div></div>`;}
+
+  async function loadQuestion(id){
+    const el=$('qdw');if(!el)return;
+    try{
+      const s=await db.collection('questions').doc(id).get();
+      if(!s.exists){el.innerHTML=`<div class="alert aerr">Question not found.</div>`;return;}
+      const d={id:s.id,...s.data()};
+      const backBtn=d.sessionId?`APP.nav('session',{id:'${d.sessionId}'})`:`APP.nav('dashboard')`;
+      const userCanAnswer=canAnswer(d);
+      el.innerHTML=`
+        <button class="btn bs1 bsm" onclick="${backBtn}" style="margin-bottom:14px">← Back</button>
+        <div class="card">
+          <div class="qmeta" style="margin-bottom:10px">
+            <span class="badge bg">${esc(d.subject)}</span>
+            <span class="badge ${typeClass(d.qtype)}">${esc(d.qtype)}</span>
+            ${d.year?`<span class="badge bgr">${esc(d.year)}</span>`:''}
+            ${d.sessionId?`<span class="badge bv">🎓 ${esc(d.sessionTitle||'Session')}</span>`:''}
+            ${d.status==='pending'?'<span class="badge bp">⏳ Awaiting Answer</span>':''}
+          </div>
+          <h2 style="font-size:1.1rem;font-weight:800;line-height:1.45;margin-bottom:12px">${esc(d.title)}</h2>
+          <div class="abody">${esc(d.detail)}</div>
+          <div style="margin-top:10px;font-size:.74rem;color:var(--mut)">
+            Asked by ${d.anonymous?'Anonymous Student':esc(d.askerName||'Student')}
+            ${d.askerCollege&&!d.anonymous?' · '+esc(d.askerCollege):''} · ${fmt(d.createdAt)}
+          </div>
+        </div>
+        ${d.status==='answered'&&d.answer?`
+          <div class="card">
+            <div style="display:flex;align-items:center;gap:11px;margin-bottom:12px">
+              <div class="ava">DK</div>
+              <div><div style="font-weight:800;color:var(--g)">${admin?'Dr. Aakash Kembhavi':d.answeredByName||'Dr. Aakash Kembhavi'}</div>
+                <div style="font-size:.74rem;color:var(--mut)">${fmt(d.answeredAt)}</div></div>
+            </div>
+            <div class="abox"><div class="abody">${esc(d.answer)}</div></div>
+            ${d.examinerNote?`<div class="enote"><div class="enote-lbl">📝 Examiner's Lens</div><div style="font-size:.87rem;line-height:1.7;white-space:pre-wrap">${esc(d.examinerNote)}</div></div>`:''}
+          </div>`:
+          `<div class="card" style="text-align:center;padding:28px;color:var(--mut)">
+            <div style="font-size:1.8rem;margin-bottom:8px">⏳</div>
+            <p style="font-weight:700">Awaiting response</p>
+            <p style="font-size:.82rem;margin-top:4px">Answers typically arrive within 3–5 working days.</p>
+          </div>`}
+        ${userCanAnswer?`<div class="card" style="background:var(--sl);border-color:var(--s)">
+          <p style="font-size:.8rem;font-weight:700;color:var(--s);margin-bottom:9px">${admin?'Admin':'Guest Teacher'} — Answer this question</p>
+          <button class="btn bp1" onclick="APP.openAnsModal('${d.id}')">✏ Write Answer</button>
+        </div>`:''}`;
+    }catch(e){el.innerHTML=`<div class="alert aerr">Error: ${esc(e.message)}</div>`;}
+  }
+
+  // ── GUEST PANEL ───────────────────────────────
+  function renderGuest(){
+    return`<div class="ph"><h2>My Session</h2><p>Questions submitted for your session(s) — ready for your answers.</p></div>
+      <div id="gpdw"><div class="loading"><div class="spin"></div></div></div>`;
+  }
+
+  async function loadGuest(){
+    const el=$('gpdw');if(!el)return;
+    if(!guestSessions.length){el.innerHTML=`<div class="empty"><div class="empty-ico">🎓</div><h3>No active sessions assigned to you</h3></div>`;return;}
+    let html='';
+    for(const gs of guestSessions){
+      const qsnap=await db.collection('questions').where('sessionId','==',gs.id).where('status','==','pending').get();
+      const qs=qsnap.docs.map(d=>({id:d.id,...d.data()}));
+      html+=`<div class="sess-hero" style="margin-bottom:14px">
+        <span class="badge ${statusClass(gs.status)}">${statusLabel(gs.status)}</span>
+        <h2 style="margin-top:6px">${esc(gs.title)}</h2>
+        <p>📅 ${fmtDT(gs.scheduledAt)} · ${esc(gs.subject)}</p>
+      </div>
+      <div class="sh"><span class="st">⏳ Pending Questions (${qs.length})</span>
+        <button class="btn bv1 bsm" onclick="APP.nav('session',{id:'${gs.id}'})">Full Session View</button></div>
+      ${qs.length?qs.map(q=>`<div class="qcard" style="cursor:default">
+        <div class="qmeta"><span class="badge bg">${esc(q.subject)}</span><span class="badge ${typeClass(q.qtype)}">${esc(q.qtype)}</span></div>
+        <div class="qtitle">${esc(q.title)}</div>
+        <div class="qprev">${esc(trunc(q.detail,120))}</div>
+        <div class="qfooter"><span class="qby">By ${q.anonymous?'Anonymous':esc(q.askerName)}</span>
+          <button class="btn bp1 bsm" onclick="APP.openAnsModal('${q.id}')">Answer</button></div>
+      </div>`).join(''):`<div class="empty" style="padding:20px"><div class="empty-ico">✅</div><h3>No pending questions yet</h3></div>`}
+      <div style="margin-bottom:24px"></div>`;
+    }
+    el.innerHTML=html;
+    // populate pendingMap for modal
+    guestSessions.forEach(async gs=>{
+      const qsnap=await db.collection('questions').where('sessionId','==',gs.id).where('status','==','pending').get();
+      qsnap.docs.forEach(d=>{pendingMap[d.id]={id:d.id,...d.data()};});
+    });
+  }
+
+  // ── ADMIN ─────────────────────────────────────
+  function renderAdmin(){
+    if(!admin)return`<div class="alert aerr">Access denied.</div>`;
+    return`<div class="ph"><h2>⚙ Admin Dashboard</h2></div>
+      <div class="adm-tabs">
+        <button class="adm-tab ${adminTab==='questions'?'act':''}" onclick="APP.setAdminTab('questions')">Q&A Queue</button>
+        <button class="adm-tab ${adminTab==='sessions'?'act':''}" onclick="APP.setAdminTab('sessions')">Sessions</button>
+        <button class="adm-tab ${adminTab==='announcements'?'act':''}" onclick="APP.setAdminTab('announcements')">Announcements</button>
+      </div>
+      <div id="adm-body"><div class="loading"><div class="spin"></div></div></div>`;
+  }
+
+  async function loadAdminTab(){
+    const el=$('adm-body');if(!el)return;
+    if(adminTab==='questions') await loadAdminQA(el);
+    else if(adminTab==='sessions') await loadAdminSessions(el);
+    else await loadAdminAnnouncements(el);
+  }
+
+  async function loadAdminQA(el){
+    try{
+      const [ps,as]=await Promise.all([db.collection('questions').where('status','==','pending').get(),db.collection('questions').where('status','==','answered').get()]);
+      pendingMap={};
+      const pdocs=ps.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.createdAt?.toDate?.()??0)-(b.createdAt?.toDate?.()??0));
+      pdocs.forEach(q=>pendingMap[q.id]=q);
+      const adocs=as.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.answeredAt?.toDate?.()??0)-(a.answeredAt?.toDate?.()??0)).slice(0,8);
+      el.innerHTML=`<div class="stats">
+        <div class="scard-s"><div class="snum" style="color:#d97706">${ps.size}</div><div class="slbl">Pending</div></div>
+        <div class="scard-s"><div class="snum">${as.size}</div><div class="slbl">Answered</div></div>
+        <div class="scard-s"><div class="snum">${ps.size+as.size}</div><div class="slbl">Total</div></div>
+      </div>
+      <div class="sh"><span class="st">⏳ Pending</span></div>
+      ${pdocs.length?pdocs.map(q=>`<div class="qcard">
+        <div class="qmeta"><span class="badge bp">Pending</span><span class="badge bg">${esc(q.subject)}</span>
+          ${q.sessionId?`<span class="badge bv">🎓 ${esc(q.sessionTitle||'Session')}</span>`:''}
+          <span class="badge ${typeClass(q.qtype)}">${esc(q.qtype)}</span></div>
+        <div class="qtitle">${esc(q.title)}</div>
+        <div class="qprev">${esc(trunc(q.detail,100))}</div>
+        <div class="qfooter"><span class="qby">${q.anonymous?'Anonymous':esc(q.askerName)} · ${esc(q.askerCollege)} · ${fmt(q.createdAt)}</span>
+          <button class="btn bp1 bsm" onclick="APP.openAnsModal('${q.id}')">Answer</button></div>
+      </div>`).join(''):`<div class="empty"><div class="empty-ico">✅</div><h3>No pending questions</h3></div>`}
+      <div class="sh" style="margin-top:24px"><span class="st">✓ Recently Answered</span></div>
+      ${adocs.map(q=>`<div class="qcard" onclick="APP.nav('question',{id:'${q.id}'})">
+        <div class="qmeta"><span class="badge bg">Answered</span><span class="badge bg">${esc(q.subject)}</span></div>
+        <div class="qtitle">${esc(q.title)}</div>
+        <div class="qfooter"><span class="qby">${fmt(q.answeredAt)}</span></div>
+      </div>`).join('')}`;
+    }catch(e){el.innerHTML=`<div class="alert aerr">${esc(e.message)}</div>`;}
+  }
+
+  async function loadAdminSessions(el){
+    try{
+      const snap=await db.collection('sessions').orderBy('scheduledAt','desc').get();
+      const docs=snap.docs.map(d=>({id:d.id,...d.data()}));
+      el.innerHTML=`<div style="display:flex;justify-content:flex-end;margin-bottom:14px">
+        <button class="btn bv1" onclick="APP.openSessModal()">+ Create New Session</button></div>
+        ${docs.length?docs.map(s=>`<div class="scard" style="cursor:default">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+            <div>
+              <span class="badge ${statusClass(s.status)}" style="margin-bottom:6px">${statusLabel(s.status)}</span>
+              <div style="font-weight:700;color:var(--v);font-size:.95rem">${esc(s.title)}</div>
+              <div style="font-size:.8rem;color:var(--mut);margin-top:3px">📅 ${fmtDT(s.scheduledAt)} · ${esc(s.subject)}</div>
+              <div style="font-size:.8rem;margin-top:3px">👤 ${esc(s.guestName)} · <code style="font-size:.75rem;background:#f3f4f6;padding:1px 5px;border-radius:4px">${esc(s.guestEmail)}</code></div>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <button class="btn bs1 bsm" onclick="APP.openSessModal('${s.id}')">Edit</button>
+              <button class="btn bv1 bsm" onclick="APP.nav('session',{id:'${s.id}'})">View</button>
+            </div>
+          </div>
+        </div>`).join(''):`<div class="empty"><div class="empty-ico">📅</div><h3>No sessions yet</h3></div>`}`;
+    }catch(e){el.innerHTML=`<div class="alert aerr">${esc(e.message)}</div>`;}
+  }
+
+  async function loadAdminAnnouncements(el){
+    try{
+      const snap=await db.collection('announcements').orderBy('createdAt','desc').get();
+      const docs=snap.docs.map(d=>({id:d.id,...d.data()}));
+      el.innerHTML=`<div style="display:flex;justify-content:flex-end;margin-bottom:14px">
+        <button class="btn bp1" onclick="APP.openAnnModal()">+ Post Announcement</button></div>
+        ${docs.length?docs.map(a=>`<div class="ann" style="position:relative">
+          ${a.pinned?'<span class="ann-pin">📌 Pinned</span>':''}
+          <div class="ann-title">${esc(a.title)}</div>
+          <div class="ann-body">${esc(trunc(a.body,150))}</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+            <span style="font-size:.74rem;color:var(--mut)">${fmt(a.createdAt)}</span>
+            <button class="btn bs1 bsm" style="color:#dc2626" onclick="APP.deleteAnn('${a.id}')">Delete</button>
+          </div>
+        </div>`).join(''):`<div class="empty"><div class="empty-ico">📢</div><h3>No announcements yet</h3></div>`}`;
+    }catch(e){el.innerHTML=`<div class="alert aerr">${esc(e.message)}</div>`;}
+  }
+
+  // ── PROFILE ───────────────────────────────────
+  function renderProfile(){
+    const p=profile||{};
+    return`<div class="ph"><h2>My Profile</h2></div>
+      <div class="card" style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:13px;margin-bottom:16px">
+          <div class="ava" style="width:46px;height:46px;font-size:1rem">${(p.name||user.displayName||'S').charAt(0).toUpperCase()}</div>
+          <div><div style="font-size:1rem;font-weight:800">${esc(p.name||user.displayName||'Student')}</div>
+            <div style="font-size:.82rem;color:var(--mut)">${esc(user.email)}</div>
+            ${p.year?`<div style="font-size:.82rem;color:var(--mut)">${esc(p.year)} · ${esc(p.college||'')}</div>`:''}
+          </div>
+        </div>
+        ${p.needsProfile?`<div class="alert aerr" style="margin-bottom:12px">⚠ Please complete your profile.</div>`:''}
+        <div class="grid2">
+          <div class="fg"><label class="fl">Full Name</label><input class="fi" id="p-name" value="${esc(p.name||user.displayName||'')}"/></div>
+          <div class="fg"><label class="fl">Year</label><select class="fs" id="p-yr">${YEARS.map(y=>`<option ${p.year===y?'selected':''}>${esc(y)}</option>`).join('')}</select></div>
+          <div class="fg" style="grid-column:1/-1"><label class="fl">College</label><input class="fi" id="p-col" value="${esc(p.college||'')}"/></div>
+        </div>
+        <div id="pmsg"></div>
+        <button class="btn bp1 bsm" id="btn-sp">Save Profile</button>
+      </div>
+      <div class="sh"><span class="st">My Questions</span></div>
+      <div id="mq"><div class="loading"><div class="spin"></div></div></div>`;
+  }
+
+  async function saveProfile(){
+    const name=$('p-name').value.trim(),yr=$('p-yr').value,col=$('p-col').value.trim();
+    if(!name){$('pmsg').innerHTML=`<div class="alert aerr">Name required.</div>`;return;}
+    $('btn-sp').disabled=true;
+    try{
+      await db.collection('users').doc(user.uid).set({name,year:yr,college:col,email:user.email,needsProfile:false,updatedAt:FS.serverTimestamp()},{merge:true});
+      await user.updateProfile({displayName:name});
+      profile={...(profile||{}),name,year:yr,college:col,needsProfile:false};
+      $('pmsg').innerHTML=`<div class="alert aok">✓ Saved.</div>`;
+    }catch(e){$('pmsg').innerHTML=`<div class="alert aerr">${esc(e.message)}</div>`;}
+    $('btn-sp').disabled=false;
+  }
+
+  async function loadMyQ(){
+    const el=$('mq');if(!el)return;
+    try{
+      const snap=await db.collection('questions').where('askedBy','==',user.uid).get();
+      const docs=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.createdAt?.toDate?.()??0)-(a.createdAt?.toDate?.()??0));
+      if(!docs.length){el.innerHTML=`<div class="empty"><div class="empty-ico">🌱</div><h3>No questions yet</h3></div>`;return;}
+      el.innerHTML=docs.map(d=>`<div class="qcard" onclick="APP.nav('question',{id:'${d.id}'})">
+        <div class="qmeta">
+          <span class="badge ${d.status==='answered'?'bg':'bp'}">${d.status==='answered'?'✓ Answered':'⏳ Pending'}</span>
+          <span class="badge bg">${esc(d.subject)}</span>
+          ${d.sessionId?`<span class="badge bv">🎓 ${esc(d.sessionTitle||'Session')}</span>`:''}
+        </div>
+        <div class="qtitle">${esc(d.title)}</div>
+        <div class="qfooter"><span class="qby">${fmt(d.createdAt)}</span></div>
+      </div>`).join('');
+    }catch(e){el.innerHTML=`<div class="alert aerr">${esc(e.message)}</div>`;}
+  }
+
+  // ── ANSWER MODAL ──────────────────────────────
+  function openAnsModal(id){
+    const q=pendingMap[id]||{title:'',detail:''};
+    answeringId=id;
+    $('ma-title').textContent=q.title||'';
+    $('ma-q').textContent=q.detail||'';
+    $('ma-ans').value='';$('ma-exam').value='';
+    $('btn-post-ans').disabled=false;$('btn-post-ans').textContent='Post Answer';
+    $('modal-ans').classList.add('open');
+  }
+  function closeAnsModal(){$('modal-ans').classList.remove('open');answeringId=null;}
+
+  async function postAnswer(){
+    const ans=$('ma-ans').value.trim(),ex=$('ma-exam').value.trim();
+    if(!ans){alert('Please write an answer.');return;}
+    const btn=$('btn-post-ans');btn.disabled=true;btn.textContent='Posting…';
+    try{
+      await db.collection('questions').doc(answeringId).update({
+        status:'answered',answer:ans,examinerNote:ex||null,
+        answeredAt:FS.serverTimestamp(),
+        answeredByName:profile?.name||user.displayName||'Faculty'
+      });
+      closeAnsModal();
+      if(view==='admin')loadAdminTab();
+      else if(view==='guest')loadGuest();
+      else if(view==='session'&&vp.id)loadSession(vp.id);
+    }catch(e){alert('Error: '+e.message);btn.disabled=false;btn.textContent='Post Answer';}
+  }
+
+  // ── SESSION MODAL ─────────────────────────────
+  async function openSessModal(id=null){
+    editingSessionId=id;
+    $('ms-heading').textContent=id?'Edit Session':'Create Guest Session';
+    $('ms-err').innerHTML='';
+    if(id){
+      try{
+        const s=await db.collection('sessions').doc(id).get();
+        const d=s.data()||{};
+        $('ms-title').value=d.title||'';$('ms-desc').value=d.description||'';
+        $('ms-subj').value=d.subject||'';$('ms-gname').value=d.guestName||'';
+        $('ms-gtitle').value=d.guestTitle||'';$('ms-gemail').value=d.guestEmail||'';
+        $('ms-status').value=d.status||'upcoming';
+        if(d.scheduledAt){const dt=d.scheduledAt.toDate();$('ms-dt').value=dt.toISOString().slice(0,16);}
+      }catch(e){}
+    }else{
+      ['ms-title','ms-desc','ms-gname','ms-gtitle','ms-gemail','ms-dt'].forEach(id=>$(id)&&($(id).value=''));
+      $('ms-subj').value='';$('ms-status').value='upcoming';
+    }
+    $('modal-sess').classList.add('open');
+  }
+  function closeSessModal(){$('modal-sess').classList.remove('open');editingSessionId=null;}
+
+  async function saveSession(){
+    const title=$('ms-title').value.trim(),desc=$('ms-desc').value.trim(),subj=$('ms-subj').value,
+          gname=$('ms-gname').value.trim(),gtitle=$('ms-gtitle').value.trim(),gemail=$('ms-gemail').value.trim(),
+          dt=$('ms-dt').value,status=$('ms-status').value;
+    if(!title||!desc||!subj||!gname||!gemail||!dt){$('ms-err').innerHTML=`<div class="alert aerr">Please fill all required fields.</div>`;return;}
+    const btn=$('btn-save-sess');btn.disabled=true;btn.textContent='Saving…';
+    try{
+      const data={title,description:desc,subject:subj,guestName:gname,guestTitle:gtitle,guestEmail:gemail.toLowerCase(),
+        scheduledAt:firebase.firestore.Timestamp.fromDate(new Date(dt)),status,updatedAt:FS.serverTimestamp()};
+      if(editingSessionId){await db.collection('sessions').doc(editingSessionId).update(data);}
+      else{data.createdAt=FS.serverTimestamp();await db.collection('sessions').add(data);}
+      closeSessModal();loadAdminTab();
+    }catch(e){$('ms-err').innerHTML=`<div class="alert aerr">${esc(e.message)}</div>`;}
+    btn.disabled=false;btn.textContent='Save Session';
+  }
+
+  // ── ANNOUNCEMENT MODAL ────────────────────────
+  async function openAnnModal(){
+    $('mann-err').innerHTML='';$('mann-title').value='';$('mann-body').value='';$('mann-pin').checked=false;
+    // populate sessions dropdown
+    try{
+      const snap=await db.collection('sessions').get();
+      const opts=snap.docs.map(d=>`<option value="${d.id}">${esc(d.data().title)}</option>`).join('');
+      $('mann-sess').innerHTML=`<option value="">No session link</option>${opts}`;
+    }catch(e){}
+    $('modal-ann').classList.add('open');
+  }
+  function closeAnnModal(){$('modal-ann').classList.remove('open');}
+
+  async function saveAnn(){
+    const title=$('mann-title').value.trim(),body=$('mann-body').value.trim(),
+          sessId=$('mann-sess').value,pinned=$('mann-pin').checked;
+    if(!title||!body){$('mann-err').innerHTML=`<div class="alert aerr">Title and message are required.</div>`;return;}
+    const btn=$('btn-save-ann');btn.disabled=true;btn.textContent='Posting…';
+    try{
+      await db.collection('announcements').add({title,body,sessionId:sessId||null,pinned,createdAt:FS.serverTimestamp()});
+      closeAnnModal();loadAdminTab();
+    }catch(e){$('mann-err').innerHTML=`<div class="alert aerr">${esc(e.message)}</div>`;}
+    btn.disabled=false;btn.textContent='Post Announcement';
+  }
+
+  async function deleteAnn(id){
+    if(!confirm('Delete this announcement?'))return;
+    try{await db.collection('announcements').doc(id).delete();loadAdminTab();}catch(e){alert(e.message);}
+  }
+
+  // ── BIND ──────────────────────────────────────
+  function bindMain(){
+    const si=$('srch');
+    if(si)si.addEventListener('input',e=>{search=e.target.value;loadDashboard();});
+    const bsq=$('btn-sq');if(bsq)bsq.onclick=submitQ;
+    const bsp=$('btn-sp');if(bsp)bsp.onclick=saveProfile;
+    $('btn-post-ans').onclick=postAnswer;
+    $('btn-save-sess').onclick=saveSession;
+    $('btn-save-ann').onclick=saveAnn;
+    if(view==='dashboard')loadDashboard();
+    if(view==='sessions')loadSessions();
+    if(view==='session'&&vp.id){loadSession(vp.id);}
+    if(view==='question'&&vp.id)loadQuestion(vp.id);
+    if(view==='guest')loadGuest();
+    if(view==='admin')loadAdminTab();
+    if(view==='profile')loadMyQ();
+  }
+
+  // Modal backdrop close
+  ['modal-ans','modal-sess','modal-ann'].forEach(id=>{
+    const el=$(id);if(el)el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('open');});
+  });
+
+  // ── GLOBAL APP OBJECT ─────────────────────────
+  window.APP={
+    nav,
+    setFilter:f=>{filter=f;nav('dashboard');},
+    switchTab:t=>{authTab=t;render();},
+    setAdminTab:t=>{adminTab=t;render();},
+    signOut:()=>auth.signOut(),
+    openAnsModal:id=>{
+      // try to load from pendingMap; if not there, fetch
+      if(pendingMap[id]){openAnsModal(id);}
+      else{
+        db.collection('questions').doc(id).get().then(s=>{
+          if(s.exists){pendingMap[id]={id:s.id,...s.data()};}
+          openAnsModal(id);
+        });
+      }
+    },
+    closeAnsModal,
+    openSessModal,
+    closeSessModal,
+    openAnnModal,
+    closeAnnModal,
+    deleteAnn
+  };
+}
+
+boot();
+</script>
+</body>
+</html>
