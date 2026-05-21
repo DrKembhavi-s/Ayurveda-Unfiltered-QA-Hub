@@ -298,8 +298,6 @@ function initApp(){
         <div class="fg"><label class="fl">Email</label><input class="fi" id="l-email" type="email" placeholder="your@email.com"/></div>
         <div class="fg"><label class="fl">Password</label><input class="fi" id="l-pass" type="password" placeholder="••••••••"/></div>
         <button class="btn bp1 bfull" id="btn-login">Sign In</button>
-        <div class="divider">or</div>
-        <button class="btn bs1 bfull" id="btn-g1">${gIcon()} Continue with Google</button>
       </div>
       <div id="reg-f" style="display:${authTab==='register'?'block':'none'}">
         <div class="fg"><label class="fl">Full Name</label><input class="fi" id="r-name" placeholder="Vd. / Dr. Your Name"/></div>
@@ -310,15 +308,13 @@ function initApp(){
           <div class="fg"><label class="fl">College</label><input class="fi" id="r-col" placeholder="Your college"/></div>
         </div>
         <button class="btn bp1 bfull" id="btn-reg">Create Account</button>
-        <div class="divider">or</div>
-        <button class="btn bs1 bfull" id="btn-g2">${gIcon()} Continue with Google</button>
         <p class="fh" style="text-align:center;margin-top:10px">By registering you agree to respectful academic use of this platform.</p>
       </div>
     </div></div>`;
   }
 
+  function fae(c,raw){return({'auth/user-not-found':'No account found with this email.','auth/wrong-password':'Incorrect password.','auth/email-already-in-use':'An account with this email already exists — please Sign In instead.','auth/invalid-email':'Invalid email address.','auth/weak-password':'Password must be at least 6 characters.','auth/too-many-requests':'Too many attempts. Please wait a few minutes and try again.','auth/network-request-failed':'Network error — check your internet connection and try again.','auth/internal-error':'Firebase internal error — please try again.'}[c]||raw||'Error ('+c+') — please try again or contact the administrator.');}
   function authErr(m){const el=$('auth-err');if(el)el.innerHTML=`<div class="alert aerr">${esc(m)}</div>`;}
-  function fae(c){return({'auth/user-not-found':'No account found.','auth/wrong-password':'Incorrect password.','auth/email-already-in-use':'Email already registered.','auth/invalid-email':'Invalid email.','auth/weak-password':'Password too weak.','auth/too-many-requests':'Too many attempts.','auth/popup-closed-by-user':'Popup closed.'}[c]||'Something went wrong.');}
 
   function bindAuth(){
     $('btn-login').onclick=async()=>{
@@ -339,15 +335,6 @@ function initApp(){
         await db.collection('users').doc(c.user.uid).set({name,email,year:yr,college:col,joinedAt:FS.serverTimestamp()});
       }catch(err){authErr(fae(err.code));$('btn-reg').disabled=false;$('btn-reg').textContent='Create Account';}
     };
-    const gIn=async()=>{
-      try{
-        const prov=new firebase.auth.GoogleAuthProvider();
-        const c=await auth.signInWithPopup(prov);
-        const s=await db.collection('users').doc(c.user.uid).get();
-        if(!s.exists)await db.collection('users').doc(c.user.uid).set({name:c.user.displayName||'',email:c.user.email||'',year:'',college:'',needsProfile:true,joinedAt:FS.serverTimestamp()});
-      }catch(err){authErr(fae(err.code));}
-    };
-    $('btn-g1').onclick=gIn;$('btn-g2').onclick=gIn;
     [$('l-email'),$('l-pass')].forEach(el=>el&&(el.onkeydown=e=>e.key==='Enter'&&$('btn-login').click()));
   }
 
