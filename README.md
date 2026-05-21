@@ -85,7 +85,7 @@ const ADMIN_EMAIL = "your-actual-email@gmail.com";
 ### Step 1 — Create a GitHub Repository
 
 1. The repository is already created at:
-   **[github.com/drkembhavi-s/Ayurveda-Unfiltered-QA-Hub](https://github.com/drkembhavi-s/Ayurveda-Unfiltered-QA-Hub)**
+   **[github.com/DrKembhavi-s/Ayurveda-Unfiltered-QA-Hub](https://github.com/DrKembhavi-s/Ayurveda-Unfiltered-QA-Hub)**
 2. Upload `index.html` and `README.md` to the repository root
 
 ### Step 2 — Enable GitHub Pages
@@ -257,7 +257,7 @@ All customisable content is in the `<script>` block of `index.html`.
 
 To serve the platform from a custom domain (e.g. `qa.astangawellness.com`):
 
-1. In your domain registrar's DNS settings, add a `CNAME` record pointing to `drkembhavi-s.github.io`
+1. In your domain registrar's DNS settings, add a `CNAME` record pointing to `DrKembhavi-s.github.io`
 2. In **GitHub → Ayurveda-Unfiltered-QA-Hub → Settings → Pages**, enter your custom domain
 3. GitHub will provision an SSL certificate automatically within minutes
 
@@ -293,4 +293,4 @@ This platform was developed for the exclusive use of Dr. Aakash Kembhavi's acade
 
 ---
 
-*Built with Firebase + GitHub Pages · Maintained by Dr. Aakash Kembhavi · [github.com/drkembhavi-s/Ayurveda-Unfiltered-QA-Hub](https://github.com/drkembhavi-s/Ayurveda-Unfiltered-QA-Hub)*
+*Built with Firebase + GitHub Pages · Maintained by Dr. Aakash Kembhavi · [github.com/DrKembhavi-s/Ayurveda-Unfiltered-QA-Hub](https://github.com/DrKembhavi-s/Ayurveda-Unfiltered-QA-Hub)*
