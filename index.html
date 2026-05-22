@@ -295,9 +295,8 @@ function initApp(){
       </div>
       <div id="auth-err"></div>
       <div id="login-f" style="display:${authTab==='login'?'block':'none'}">
-        <div class="fg"><label class="fl">Email</label>        <div style="display:none"><input type="text" name="fakeuser"/><input type="password" name="fakepass"/></div>
-        <input class="fi" id="l-email" type="text" name="l-email-x" placeholder="your@email.com"/></div>
-        <div class="fg"><label class="fl">Password</label><input class="fi" id="l-pass" type="password" name="l-pass-x" placeholder="••••••••"/></div>
+        <div class="fg"><label class="fl">Email</label>        <input class="fi" id="l-email" type="text" placeholder="your@email.com"/></div>
+        <div class="fg"><label class="fl">Password</label><input class="fi" id="l-pass" type="password" placeholder="••••••••"/></div>
         <button class="btn bp1 bfull" id="btn-login">Sign In</button>
       </div>
       <div id="reg-f" style="display:${authTab==='register'?'block':'none'}">
@@ -318,6 +317,12 @@ function initApp(){
   function authErr(m){const el=$('auth-err');if(el)el.innerHTML=`<div class="alert aerr">${esc(m)}</div>`;}
 
   function bindAuth(){
+    // Force-clear autofill after browser fills fields
+    setTimeout(()=>{
+      const le=$('l-email'), lp=$('l-pass');
+      if(le){le.value=''; le.setAttribute('placeholder','Type your email here');}
+      if(lp){lp.value=''; lp.setAttribute('placeholder','Type your password here');}
+    }, 300);
     $('btn-login').onclick=async()=>{
       const e=$('l-email').value.trim(),p=$('l-pass').value;
       if(!e||!p){authErr('Please fill all fields.');return;}
