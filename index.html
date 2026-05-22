@@ -295,8 +295,8 @@ function initApp(){
       </div>
       <div id="auth-err"></div>
       <div id="login-f" style="display:${authTab==='login'?'block':'none'}">
-        <div class="fg"><label class="fl">Email</label>        <input class="fi" id="l-email" type="text" placeholder="your@email.com"/></div>
-        <div class="fg"><label class="fl">Password</label><input class="fi" id="l-pass" type="password" placeholder="••••••••"/></div>
+        <div class="fg"><label class="fl">Email</label>        <div id="l-email-wrap"></div></div>
+        <div class="fg"><label class="fl">Password</label><div id="l-pass-wrap"></div></div>
         <button class="btn bp1 bfull" id="btn-login">Sign In</button>
       </div>
       <div id="reg-f" style="display:${authTab==='register'?'block':'none'}">
@@ -317,12 +317,14 @@ function initApp(){
   function authErr(m){const el=$('auth-err');if(el)el.innerHTML=`<div class="alert aerr">${esc(m)}</div>`;}
 
   function bindAuth(){
-    // Force-clear autofill after browser fills fields
+    // Inject login fields dynamically — defeats all browser autofill
     setTimeout(()=>{
-      const le=$('l-email'), lp=$('l-pass');
-      if(le){le.value=''; le.setAttribute('placeholder','Type your email here');}
-      if(lp){lp.value=''; lp.setAttribute('placeholder','Type your password here');}
-    }, 300);
+      const ew=$('l-email-wrap'), pw=$('l-pass-wrap');
+      if(ew){const i=document.createElement('input');i.className='fi';i.id='l-email';i.type='email';i.placeholder='Type your email here';ew.appendChild(i);}
+      if(pw){const i=document.createElement('input');i.className='fi';i.id='l-pass';i.type='password';i.placeholder='Type your password here';pw.appendChild(i);}
+      const le=$('l-email'),lp=$('l-pass');
+      if(le&&lp) [le,lp].forEach(el=>el.addEventListener('keydown',e=>e.key==='Enter'&&$('btn-login').click()));
+    },500);
     $('btn-login').onclick=async()=>{
       const e=$('l-email').value.trim(),p=$('l-pass').value;
       if(!e||!p){authErr('Please fill all fields.');return;}
