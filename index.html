@@ -295,8 +295,8 @@ function initApp(){
       </div>
       <div id="auth-err"></div>
       <div id="login-f" style="display:${authTab==='login'?'block':'none'}">
-        <div class="fg"><label class="fl">Email</label>        <input class="fi" id="l-email" type="email" placeholder="your@email.com" autocomplete="off"/></div>
-        <div class="fg"><label class="fl">Password</label><input class="fi" id="l-pass" type="password" placeholder="••••••••" autocomplete="new-password"/></div>
+        <div class="fg"><label class="fl">Email</label>        <input class="fi" id="l-email" type="text" placeholder="your@email.com" autocomplete="new-password" readonly onfocus="this.removeAttribute('readonly')"/></div>
+        <div class="fg"><label class="fl">Password</label><input class="fi" id="l-pass" type="password" placeholder="••••••••" autocomplete="new-password" readonly onfocus="this.removeAttribute('readonly')"/></div>
         <button class="btn bp1 bfull" id="btn-login">Sign In</button>
       </div>
       <div id="reg-f" style="display:${authTab==='register'?'block':'none'}">
